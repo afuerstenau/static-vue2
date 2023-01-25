@@ -3,8 +3,14 @@ import HomeView from "../views/HomeView.vue";
 
 const routes = [
   {
+    path: "/:token",
+    name: "home1",
+    component: HomeView,
+    props: true,
+  },
+  {
     path: "/",
-    name: "home",
+    name: "home2",
     component: HomeView,
   },
   {
