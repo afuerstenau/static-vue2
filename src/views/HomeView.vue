@@ -5,7 +5,7 @@ const kundendaten = ref(null);
 onMounted(() => {
   axios
     .get(
-      "http://meintest.green-planet-energy.de/p1?method=bestaetigeVertrag&token=TestAFU123",
+      "https://meintest.green-planet-energy.de/p1?method=bestaetigeVertrag&token=TestAFU123",
       {
         crossDomain: true,
         withCredentials: false,
