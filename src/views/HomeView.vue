@@ -26,7 +26,7 @@ onMounted(() => {
 <script>
 export default {
   name: "HomeView",
-  props: ["token", "kundendaten"],
+  props: ["token"],
 };
 </script>
 
