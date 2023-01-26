@@ -1,7 +1,7 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
-const kundendaten = ref(null);
+var kundendaten = ref(null);
 onMounted(() => {
   axios
     .get(
@@ -17,6 +17,7 @@ onMounted(() => {
     )
     .then((response) => {
       console.log(response);
+      kundendaten = response.data;
       console.log(kundendaten);
     });
 });
