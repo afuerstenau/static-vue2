@@ -1,8 +1,8 @@
 <script setup>
 import axios from "axios";
-import { ref, onMounted } from "vue";
-var kundendaten = ref(null);
-onMounted(() => {
+import { ref, onBeforeMount } from "vue";
+const kundendaten = ref(null);
+onBeforeMount(() => {
   axios
     .get(
       "https://meintest.greenpeace-energy.de/p1?method=bestaetigeVertrag&token=TestAFU123",
@@ -17,21 +17,13 @@ onMounted(() => {
     )
     .then((response) => {
       console.log(response);
-      kundendaten = response.data;
+      kundendaten.value = response.data;
       console.log(kundendaten);
     });
 });
 </script>
 
-<script>
-export default {
-  name: "HomeView",
-  props: ["token"],
-};
-</script>
-
 <template>
-  <div class="home">
-    Das Token ist {{ token }} Kundendaten: {{ kundendaten }}
-  </div>
+  <div class="home">Das Token ist Kundendaten: {{ kundendaten }}</div>
+  kundendaten
 </template>
