@@ -1,40 +1,28 @@
-<script setup>
-import axios from "axios";
-import { ref, onBeforeMount } from "vue";
-const kundendaten = ref(null);
-console.log("token" + this.props);
-onBeforeMount(() => {
-  axios
-    .get(
-      "https://meintest.greenpeace-energy.de/p1?method=bestaetigeVertrag&token=" +
-        this.props.token,
-      {
-        crossDomain: true,
-        withCredentials: false,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-        },
-      }
-    )
-    .then((response) => {
-      console.log(response);
-      kundendaten.value = response.data;
-      console.log(kundendaten);
-    });
-});
-</script>
-
 <script>
+import Kundendatenservice from "@/services/Kundendatenservice.js";
 export default {
   name: "HomeView",
   props: ["token"],
+  data() {
+    return {
+      kundendaten: null,
+    };
+  },
+  created() {
+    Kundendatenservice.getKundendaten(this.token)
+      .then((response) => {
+        this.kundendaten = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 };
 </script>
 
 <template>
-  <div class="home">
-    Das Token {{ token }} ist Kundendaten: {{ kundendaten }}
+  <div v-if="kundendaten" class="home">
+    Das Token {{ token }} ist Kundendaten: {{ this.kundendaten }}
   </div>
   kundendaten
 </template>
