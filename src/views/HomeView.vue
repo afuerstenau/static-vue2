@@ -2,10 +2,12 @@
 import axios from "axios";
 import { ref, onBeforeMount } from "vue";
 const kundendaten = ref(null);
+console.log("token" + this.props);
 onBeforeMount(() => {
   axios
     .get(
-      "https://meintest.greenpeace-energy.de/p1?method=bestaetigeVertrag&token=TestAFU123",
+      "https://meintest.greenpeace-energy.de/p1?method=bestaetigeVertrag&token=" +
+        this.props.token,
       {
         crossDomain: true,
         withCredentials: false,
@@ -23,7 +25,16 @@ onBeforeMount(() => {
 });
 </script>
 
+<script>
+export default {
+  name: "HomeView",
+  props: ["token"],
+};
+</script>
+
 <template>
-  <div class="home">Das Token ist Kundendaten: {{ kundendaten }}</div>
+  <div class="home">
+    Das Token {{ token }} ist Kundendaten: {{ kundendaten }}
+  </div>
   kundendaten
 </template>
